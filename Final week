@@ -1,0 +1,350 @@
+Sammy================
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+public class JSammysSeashore1 extends JFrame implements ItemListener, ActionListener
+
+{
+    FlowLayout flowval = new FlowLayout();
+    JTextField hoursFieldval = new JTextField(9);
+    JLabel hoursLabelval = new JLabel("enter hours for rental");
+    JCheckBox jetSkiBox1 = new JCheckBox("Jet ski rental", false);
+    JCheckBox pontoonBox1 = new JCheckBox("Pontoon boat rental", false);
+    JCheckBox rowBoatBox1 = new JCheckBox("Row boat equipment", false);
+    JCheckBox canoeBox1 = new JCheckBox("Canoe equipment", false);
+    JCheckBox kayakBox1 = new JCheckBox("Kayak equipment", false);
+    JCheckBox beachChairBox1 = new JCheckBox("Beach chair equipment", false);
+    JCheckBox umbrellaBox1 = new JCheckBox("Umbrella rental", false);
+    JCheckBox lessonBox1 = new JCheckBox("Lesson rental", false);
+    JCheckBox noLessonBox1 = new JCheckBox("No lessonrental", true);
+    JLabel main = new JLabel("Sammy's Seashore Rentals equipment");
+    Font font1 = new Font("Times New Roman", Font.ITALIC, 25);
+    Font font21 = new Font("Times New Roman", Font.PLAIN, 25);
+    JLabel labelTotalval = new JLabel("Total equipement");
+    JLabel label11 = new JLabel("Select rental process");
+    JLabel label22 = new JLabel("Lessons?");
+    JLabel totalPrice = new JLabel();
+    JLabel explainLabel123 = new JLabel();
+    int housePriceval = 0;
+    int lessonPriceval = 0;
+    int equipPriceval = 0;
+    int priceval = 0;
+    int hours12;
+    String outputval = "";
+    String equipStringval = "";
+    String timeStringval = "";
+    String lessonStringval = "";
+
+    public JSammysSeashore1()
+    {
+        super("Menu items");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(flowval);
+        ButtonGroup equipmentGroup12 = new ButtonGroup();
+        equipmentGroup12.add(jetSkiBox1);
+        equipmentGroup12.add(pontoonBox1);
+        equipmentGroup12.add(rowBoatBox1);
+        equipmentGroup12.add(canoeBox1);
+        equipmentGroup12.add(kayakBox1);
+        equipmentGroup12.add(beachChairBox1);
+        equipmentGroup12.add(umbrellaBox1);
+
+        ButtonGroup lessonGroup12 = new ButtonGroup();
+        lessonGroup12.add(lessonBox1);
+        lessonGroup12.add(noLessonBox1);
+
+        add(main);
+        add(hoursLabelval);
+        add(hoursFieldval);
+        add(label11);
+        add(jetSkiBox1);
+        add(pontoonBox1);
+        add(rowBoatBox1);
+        add(canoeBox1);
+        add(kayakBox1);
+        add(beachChairBox1);
+        add(umbrellaBox1);
+
+        main.setFont(font1);
+        label11.setFont(font21);
+        label22.setFont(font21);
+        totalPrice.setFont(font21);
+
+        add(label22);
+        add(lessonBox1);
+        add(noLessonBox1);
+        add(labelTotalval);
+        add(totalPrice);
+
+        totalPrice.setText("$0");
+
+        add(explainLabel123);
+
+        hoursFieldval.addActionListener(this);
+        jetSkiBox1.addItemListener(this);
+        pontoonBox1.addItemListener(this);
+        rowBoatBox1.addItemListener(this);
+        kayakBox1.addItemListener(this);
+        canoeBox1.addItemListener(this);
+        beachChairBox1.addItemListener(this);
+        umbrellaBox1.addItemListener(this);
+        lessonBox1.addItemListener(this);
+        noLessonBox1.addItemListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e1)
+    {
+        Object sourceval = e1.getSource();
+        if (sourceval == hoursFieldval)
+        {
+            try
+            {
+                hours12 = Integer.parseInt(hoursFieldval.getText());
+            }
+            catch (Exception exc12)
+            {
+                hours12 = 0;
+                hoursFieldval.setText("invalid entry");
+            }
+            housePriceval = hours12 * equipPriceval;
+            priceval = housePriceval + lessonPriceval;
+            timeStringval = "- for " + hours12 + " hours - ";
+            outputval = "$" + priceval;
+            totalPrice.setText(outputval);
+            outputval = "Rental details: " + equipStringval + timeStringval + lessonStringval;
+            explainLabel123.setText(outputval);
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent check12) {
+        Object source12 = check12.getItem();
+        int select12 = check12.getStateChange();
+        final int HIGH_PRICEval = 40;
+        final int MED_PRICEval = 20;
+        final int LOW_PRICEval = 7;
+        final int LESSON_PRICEval = 5;
+
+        if (select12 == ItemEvent.SELECTED) {
+            if (source12 == jetSkiBox1) {
+                equipStringval = "- jet ski @ $" + HIGH_PRICEval + " per hour - ";
+                equipPriceval = HIGH_PRICEval;
+            } else if (source12 == pontoonBox1) {
+                equipStringval = "- pontoon boat @ $" + HIGH_PRICEval + " per hour - ";
+                equipPriceval = HIGH_PRICEval;
+            } else if (source12 == rowBoatBox1) {
+                equipStringval = " - row boat @ $" + MED_PRICEval + " per hour - ";
+                equipPriceval = MED_PRICEval;
+            } else if (source12 == canoeBox1) {
+                equipStringval = "- row boat @ $" + MED_PRICEval + " per hour - ";
+                equipPriceval = MED_PRICEval;
+            } else if (source12 == kayakBox1) {
+                equipStringval = " - kayak @ $" + MED_PRICEval + " per hour - ";
+                equipPriceval = MED_PRICEval;
+            } else if (source12 == beachChairBox1) {
+                equipStringval = " - beach chair @ $" + LOW_PRICEval + " per hour - ";
+                equipPriceval = LOW_PRICEval;
+            } else if (source12 == umbrellaBox1) {
+                equipStringval = " - umbrella @ $" + LOW_PRICEval + " per hour - ";
+                equipPriceval = LOW_PRICEval;
+            } else if (source12 == lessonBox1) {
+                lessonStringval = " - lesson @ $" + LESSON_PRICEval;
+                lessonPriceval = LESSON_PRICEval;
+            } else {
+                lessonStringval = " - no lesson";
+                lessonPriceval = 0;
+            }
+            housePriceval = hours12 * equipPriceval;
+            priceval = housePriceval + lessonPriceval;
+            outputval = "$" + priceval;
+            totalPrice.setText(outputval);
+            outputval = "Rental details information: " + equipStringval + timeStringval + lessonStringval;
+            explainLabel123.setText(outputval);
+        }
+    }
+
+    public static void main(String[] args) {
+        JSammysSeashore1 frame12 = new JSammysSeashore1();
+        frame12.setSize(400, 250);
+        frame12.setVisible(true);
+    }
+}
+
+CArly============================
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class JCarlysCatering extends JFrame implements ItemListener, ActionListener {
+
+    FlowLayout flow = new FlowLayout();
+    JTextField guestsText = new JTextField(20);
+    JLabel guestsLabel = new JLabel("Please Enter no. of guests");
+    JCheckBox chinese = new JCheckBox("Chinese", false);
+    JCheckBox american = new JCheckBox("American", false);
+    JCheckBox indian = new JCheckBox("Indian", false);
+    JCheckBox mexican = new JCheckBox("Mexican", false);
+    JCheckBox salad = new JCheckBox("Salad", false);
+    JCheckBox garlic = new JCheckBox("Garlic Bread", false);
+    JCheckBox veg = new JCheckBox("Mixed Vegetables", false);
+    JCheckBox bread = new JCheckBox("Bread", false);
+    JCheckBox cake = new JCheckBox("Choco Lava Cake", false);
+    JCheckBox pudding = new JCheckBox("Chocolate Pudding", false);
+    JCheckBox icecream = new JCheckBox("Butterscotch Icecream", false);
+    JLabel mainLabel = new JLabel("Carly's Cattering");
+    Font font = new Font("Courier New", Font.ITALIC, 35);
+    JLabel label1 = new JLabel("Select main Course Options:");
+    JLabel label2 = new JLabel("");
+    JLabel tprice = new JLabel("");
+    double price = 0;
+    String mainCourse = "";
+    String sides = "";
+    String dessert = "";
+    String output;
+    int numSelected = 0;
+    final int PRICE_PER_GUEST = 35;
+
+    public JCarlysCatering() {
+        super("Menu options");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(flow);
+        ButtonGroup entrees = new ButtonGroup();
+        entrees.add(chinese);
+        entrees.add(american);
+        entrees.add(indian);
+        entrees.add(mexican);
+
+        ButtonGroup desserts = new ButtonGroup();
+        desserts.add(cake);
+        desserts.add(pudding);
+        desserts.add(icecream);
+        add(mainLabel);
+        mainLabel.setFont(font);
+        add(guestsLabel);
+        add(guestsText);
+        add(label1);
+        add(chinese);
+        add(american);
+        add(indian);
+        add(mexican);
+
+        add(new JLabel("Select upto 2 side items:"));
+        add(salad);
+        add(garlic);
+        add(veg);
+        add(bread);
+
+        add(new JLabel("Select dessert:"));
+        add(cake);
+        add(pudding);
+        add(icecream);
+        add(label2);
+        add(tprice);
+
+        tprice.setText("Total = $0");
+        guestsText.addActionListener(this);
+        chinese.addItemListener(this);
+        american.addItemListener(this);
+        indian.addItemListener(this);
+        mexican.addItemListener(this);
+        salad.addItemListener(this);
+        garlic.addItemListener(this);
+        veg.addItemListener(this);
+        bread.addItemListener(this);
+        cake.addItemListener(this);
+        pudding.addItemListener(this);
+        icecream.addItemListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if (source == guestsText) {
+            try {
+                price = Integer.parseInt(guestsText.getText()) * PRICE_PER_GUEST;
+            }
+            catch (Exception exc)
+            {
+                price = 0;
+                guestsText.setText("0");
+            }
+            output = "Total = $" + price + " " + "Menu includes" + mainCourse + sides + dessert + "";
+            tprice.setText(output);
+        }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent check) {
+        Object source = check.getSource();
+        int select = check.getStateChange();
+        if (select == ItemEvent.SELECTED)
+            if (source == chinese)
+                mainCourse = "-chinese-";
+            else if (source == american)
+                mainCourse = "-american-";
+            else if (source == indian)
+                mainCourse = "-indian-";
+            else if (source == mexican)
+                mainCourse = "-mexican-";
+
+        if (select == ItemEvent.SELECTED)
+            if (source == cake)
+                dessert = "-cake-";
+            else if (source == pudding)
+                dessert = "-pudding-";
+            else if (source == icecream)
+                dessert = "-icecream-";
+
+        if (source == salad || source == garlic || source == veg || source == bread)
+        {
+            if (select == ItemEvent.SELECTED)
+                ++numSelected;
+            else
+                --numSelected;
+            sides = "";
+
+            if (numSelected <= 2)
+            {
+                if (salad.isSelected())
+                    sides += "-salad-";
+                if (garlic.isSelected())
+                    sides += "-garlic-";
+                if (veg.isSelected())
+                    sides += "-mixed vegetables-";
+                if (bread.isSelected())
+                    sides += "-bread-";
+            }
+            else
+            {
+                salad.setSelected(false);
+                garlic.setSelected(false);
+                veg.setSelected(false);
+                bread.setSelected(false);
+            }
+        }
+
+        try {
+            price = Integer.parseInt(guestsText.getText()) * PRICE_PER_GUEST;
+        }
+
+        catch (Exception e)
+        {
+            price = 0;
+            guestsText.setText("0");
+        }
+
+        output = "Total = $" + price + " " + "Menu includes " + mainCourse + sides + dessert + "";
+        tprice.setText(output);
+    }
+
+    public static void main(String[] args)
+    {
+        JCarlysCatering frame = new JCarlysCatering();
+        frame.setSize(530, 250);
+        frame.setVisible(true);
+    }
+}
+
